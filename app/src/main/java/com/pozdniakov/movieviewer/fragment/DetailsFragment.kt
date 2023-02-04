@@ -6,12 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.pozdniakov.movieviewer.R
+import com.pozdniakov.movieviewer.api.MovieApi
 import com.pozdniakov.movieviewer.data.Genres
 import com.pozdniakov.movieviewer.data.Movie
 import com.pozdniakov.movieviewer.databinding.DetailsFragmentBinding
 import com.pozdniakov.movieviewer.databinding.PopularFragmentBinding
+import com.pozdniakov.movieviewer.repository.MainRepository
 import com.pozdniakov.movieviewer.viewmodel.DetailsViewModel
+import com.pozdniakov.movieviewer.viewmodel.PopularViewModel
+import com.pozdniakov.movieviewer.viewmodel.ViewModelFactory
 import com.squareup.picasso.Picasso
 
 class DetailsFragment : Fragment() {
@@ -25,16 +31,34 @@ class DetailsFragment : Fragment() {
     ): View? {
         var movie = arguments?.getParcelable("movie") as Movie?
         binding = DetailsFragmentBinding.inflate(layoutInflater)
-        movie?.let {
+
+        val movieApi = MovieApi.getInstance()
+        val mainRepository = MainRepository(movieApi)
+        viewModel = ViewModelProvider(this, ViewModelFactory(mainRepository))[DetailsViewModel::class.java]
+
+        viewModel.description.observe(this) {
             Picasso.get()
-                .load(movie.posterUrl)
+                .load(it.posterUrl)
                 .into(binding.detailsImageView)
-            binding.detailsNameTextView.text = movie.nameRu
-            binding.detailsCountryTextView.text = movie.countries.firstOrNull()?.country
-            binding.detailsGenreTextView.text = movie.genres.firstOrNull()?.genre
-            binding.detailsDescriptionTextView.text = movie.ratingVoteCount?.toString()
+            binding.detailsNameTextView.text = it.nameRu
+            binding.detailsCountryTextView.text = it.countries.firstOrNull()?.country
+            binding.detailsGenreTextView.text = it.genres.firstOrNull()?.genre
+            binding.detailsDescriptionTextView.text = it.description
         }
 
+        viewModel.errorMessage.observe(this) {
+            Toast.makeText(this.context, it, Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.loading.observe(this, Observer {
+            if (it) {
+                binding.progressDialog.visibility = View.VISIBLE
+            } else {
+                binding.progressDialog.visibility = View.GONE
+            }
+        })
+
+        movie?.filmId.let { viewModel.getDescription(it!!) }
 
         return binding.root
     }

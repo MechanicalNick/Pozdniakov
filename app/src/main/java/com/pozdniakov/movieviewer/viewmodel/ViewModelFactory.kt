@@ -9,7 +9,11 @@ class ViewModelFactory constructor(private val repository: MainRepository): View
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return if (modelClass.isAssignableFrom(PopularViewModel::class.java)) {
             PopularViewModel(this.repository) as T
-        } else {
+        }
+        else if(modelClass.isAssignableFrom(DetailsViewModel::class.java)){
+            DetailsViewModel(this.repository) as T
+        }
+        else {
             throw IllegalArgumentException("ViewModel Not Found")
         }
     }
