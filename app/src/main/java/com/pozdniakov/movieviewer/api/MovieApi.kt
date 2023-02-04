@@ -15,21 +15,21 @@ interface MovieApi {
         "Content-Type: application/json"
     )
     @GET("/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS")
-    suspend fun getPopular() : Response<Popular>
+    suspend fun getPopular(): Response<Popular>
 
     @Headers(
         "X-API-KEY: e30ffed0-76ab-4dd6-b41f-4c9da2b2735b",
         "Content-Type: application/json"
     )
     @GET("/api/v2.2/films/{id}")
-    suspend fun getDescription(@Path("id") id: Int) : Response<MovieDescription>
+    suspend fun getDescription(@Path("id") id: Int): Response<MovieDescription>
 
     companion object {
         private const val baseUrl = "https://kinopoiskapiunofficial.tech"
 
         var retrofitService: MovieApi? = null
 
-        fun getInstance() : MovieApi {
+        fun getInstance(): MovieApi {
             if (retrofitService == null) {
                 val retrofit = Retrofit.Builder()
                     .baseUrl(baseUrl)

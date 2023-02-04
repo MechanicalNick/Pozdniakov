@@ -2,8 +2,8 @@ package com.pozdniakov.movieviewer.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.pozdniakov.movieviewer.repository.MainRepository
 import com.pozdniakov.movieviewer.data.Popular
+import com.pozdniakov.movieviewer.repository.MainRepository
 import kotlinx.coroutines.*
 
 class PopularViewModel(private val repository: MainRepository) : ViewModel() {

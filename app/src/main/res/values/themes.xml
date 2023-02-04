@@ -33,9 +33,6 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.MovieViewer.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="Theme.MovieViewer.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
-
     <style name="Theme.MovieViewer.Main.Text" parent="">
         <item name="android:textSize">@dimen/textSize</item>
         <item name="android:fontFamily">Roboto</item>

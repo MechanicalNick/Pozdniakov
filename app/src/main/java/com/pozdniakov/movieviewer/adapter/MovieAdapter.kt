@@ -6,17 +6,18 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.pozdniakov.movieviewer.data.Movie
 import com.pozdniakov.movieviewer.R
+import com.pozdniakov.movieviewer.data.Movie
 import com.pozdniakov.movieviewer.databinding.MovieItemBinding
 import com.squareup.picasso.Picasso
 
 private const val maxCharInString = 31
 
-class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     var data: MutableList<Movie> = mutableListOf()
 
     class MovieViewHolder(val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = MovieItemBinding.inflate(inflater, parent, false)
@@ -32,7 +33,7 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         with(holder.binding) {
             holder.binding.movie = movie
 
-            nameTextView.text =  getName(movie)
+            nameTextView.text = getName(movie)
             genreTextView.text = getDescription(movie)
 
             val bundle = bundleOf("movie" to movie)
@@ -45,18 +46,18 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         }
     }
 
-    private fun getName(movie: Movie) : String{
+    private fun getName(movie: Movie): String {
         val name = movie.nameRu.orEmpty()
-        return if(name.length > maxCharInString) "${name.take(maxCharInString)}..." else name
+        return if (name.length > maxCharInString) "${name.take(maxCharInString)}..." else name
     }
 
-    private fun getDescription(movie: Movie) : String{
+    private fun getDescription(movie: Movie): String {
         val descriptionBuilder = StringBuilder()
-        val genre = movie.genres.firstOrNull { x -> !x.genre.isNullOrEmpty()}
-        if(genre != null)
+        val genre = movie.genres.firstOrNull { x -> !x.genre.isNullOrEmpty() }
+        if (genre != null)
             descriptionBuilder.append(genre.genre)
-        if(movie.year != null)
-            descriptionBuilder.append(if(descriptionBuilder.isNotEmpty()) " (${movie.year})" else movie.year)
+        if (movie.year != null)
+            descriptionBuilder.append(if (descriptionBuilder.isNotEmpty()) " (${movie.year})" else movie.year)
         return descriptionBuilder.toString()
     }
 }
