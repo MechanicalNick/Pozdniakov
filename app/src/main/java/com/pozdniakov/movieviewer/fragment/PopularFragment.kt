@@ -8,9 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.pozdniakov.movieviewer.viewmodel.PopularViewModel
 import com.pozdniakov.movieviewer.R
+import com.pozdniakov.movieviewer.adapter.MovieAdapter
+import com.pozdniakov.movieviewer.databinding.PopularFragmentBinding
+import com.pozdniakov.movieviewer.decorator.MarginItemDecoration
 
 class PopularFragment : Fragment() {
-
+    private lateinit var binding: PopularFragmentBinding
+    private lateinit var adapter: MovieAdapter
     companion object {
         fun newInstance() = PopularFragment()
     }
@@ -21,7 +25,13 @@ class PopularFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.popular_fragment, container, false)
+        binding = PopularFragmentBinding.inflate(layoutInflater)
+        adapter = MovieAdapter()
+        binding.recyclerView.adapter = adapter
+        binding.recyclerView.addItemDecoration(
+            MarginItemDecoration(resources.getDimensionPixelSize(R.dimen.margin))
+        )
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+            android:layout_height="93dp"
+            android:clickable="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:layout_width="match_parent">
+        <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="40dp"
+                android:layout_height="63dp"
+                android:src="@drawable/ic_launcher_foreground"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"/>
+
+        <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Theme.MovieViewer.Main.Text"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="26dp"/>
+
+        <TextView
+                android:id="@+id/genreTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Theme.MovieViewer.Description.Text"
+                android:layout_marginStart="70dp"
+                android:layout_marginTop="50dp"/>
+
+        <ImageView
+                android:id="@+id/starImageView"
+                android:src="@drawable/star"
+                android:layout_gravity="end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="28dp"/>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
