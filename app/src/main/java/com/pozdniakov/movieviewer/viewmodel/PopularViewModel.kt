@@ -30,8 +30,8 @@ class PopularViewModel(private val repository: MainRepository) : ViewModel() {
     }
 
     private fun onError(message: String) {
-        errorMessage.value = message
-        loading.value = false
+        errorMessage.postValue(message)
+        loading.postValue(false)
     }
 
     override fun onCleared() {
