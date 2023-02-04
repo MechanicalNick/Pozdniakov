@@ -15,10 +15,6 @@ import com.pozdniakov.movieviewer.adapter.ViewPagerAdapter
 
 class TabFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = TabFragment()
-    }
-
     private lateinit var viewModel: TabViewModel
 
     override fun onCreateView(
@@ -27,13 +23,6 @@ class TabFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.tab_fragment, container, false)
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(TabViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
         val viewPager = view.findViewById<ViewPager2>(R.id.pager)

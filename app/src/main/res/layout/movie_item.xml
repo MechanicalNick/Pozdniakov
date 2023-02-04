@@ -25,7 +25,7 @@
 
         <TextView
                 android:id="@+id/nameTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 style="@style/Theme.MovieViewer.Main.Text"
                 android:layout_marginStart="70dp"
@@ -33,7 +33,7 @@
 
         <TextView
                 android:id="@+id/genreTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 style="@style/Theme.MovieViewer.Description.Text"
                 android:layout_marginStart="70dp"
