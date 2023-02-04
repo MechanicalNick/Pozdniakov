@@ -1,9 +1,13 @@
 package com.pozdniakov.movieviewer.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import com.pozdniakov.movieviewer.Movie
+import com.pozdniakov.movieviewer.data.Movie
+import com.pozdniakov.movieviewer.R
 import com.pozdniakov.movieviewer.databinding.MovieItemBinding
 import com.squareup.picasso.Picasso
 
@@ -11,6 +15,7 @@ private const val maxCharInString = 31
 
 class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     var data: MutableList<Movie> = mutableListOf()
+
     class MovieViewHolder(val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -23,11 +28,17 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
         val movie = data[position]
+
         with(holder.binding) {
+            holder.binding.movie = movie
 
             nameTextView.text =  getName(movie)
             genreTextView.text = getDescription(movie)
 
+            val bundle = bundleOf("movie" to movie)
+            holder.binding.toDetailsClickListener = Navigation
+                .createNavigateOnClickListener(R.id.detailsFragment, bundle)
+            holder.binding.favouriteLongClickListener = View.OnLongClickListener { true }
             Picasso.get()
                 .load(movie.posterUrlPreview)
                 .into(imageView)

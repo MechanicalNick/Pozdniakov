@@ -1,6 +1,6 @@
 package com.pozdniakov.movieviewer.api
 
-import com.pozdniakov.movieviewer.Popular
+import com.pozdniakov.movieviewer.data.Popular
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

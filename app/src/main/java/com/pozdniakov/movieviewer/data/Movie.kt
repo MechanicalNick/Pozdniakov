@@ -1,6 +1,9 @@
-package com.pozdniakov.movieviewer
+package com.pozdniakov.movieviewer.data
 
+import android.os.Parcel
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 
 data class Movie (
@@ -18,4 +21,53 @@ data class Movie (
   @SerializedName("posterUrlPreview" ) var posterUrlPreview : String?              = null,
   @SerializedName("ratingChange"     ) var ratingChange     : String?              = null
 
-)
+) : Parcelable {
+  constructor(parcel: Parcel) : this(
+    parcel.readValue(Int::class.java.classLoader) as? Int,
+    parcel.readString(),
+    parcel.readString(),
+    parcel.readString(),
+    parcel.readString(),
+    arrayListOf<Countries>().apply {
+      parcel.readArrayList(Countries::class.java.classLoader, Countries::class.java)
+    },
+    arrayListOf<Genres>().apply {
+      parcel.readArrayList(Genres::class.java.classLoader, Genres::class.java)
+    },
+    parcel.readString(),
+    parcel.readValue(Int::class.java.classLoader) as? Int,
+    parcel.readString(),
+    parcel.readString(),
+    parcel.readString()
+  ) {
+  }
+
+  override fun writeToParcel(parcel: Parcel, flags: Int) {
+    parcel.writeValue(filmId)
+    parcel.writeString(nameRu)
+    parcel.writeString(nameEn)
+    parcel.writeString(year)
+    parcel.writeString(filmLength)
+    parcel.writeParcelableList(countries, 0)
+    parcel.writeParcelableList(genres, 0)
+    parcel.writeString(rating)
+    parcel.writeValue(ratingVoteCount)
+    parcel.writeString(posterUrl)
+    parcel.writeString(posterUrlPreview)
+    parcel.writeString(ratingChange)
+  }
+
+  override fun describeContents(): Int {
+    return 0
+  }
+
+  companion object CREATOR : Parcelable.Creator<Movie> {
+    override fun createFromParcel(parcel: Parcel): Movie {
+      return Movie(parcel)
+    }
+
+    override fun newArray(size: Int): Array<Movie?> {
+      return arrayOfNulls(size)
+    }
+  }
+}

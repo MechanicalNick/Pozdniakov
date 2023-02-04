@@ -3,7 +3,7 @@
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/nav_graph"
-            app:startDestination="@id/FirstFragment">
+            app:startDestination="@id/tabFragment2">
 
     <fragment
             android:id="@+id/FirstFragment"
@@ -24,5 +24,13 @@
         <action
                 android:id="@+id/action_SecondFragment_to_FirstFragment"
                 app:destination="@id/FirstFragment"/>
+    </fragment>
+    <fragment android:id="@+id/detailsFragment" android:name="com.pozdniakov.movieviewer.fragment.DetailsFragment"
+              android:label="details_fragment" tools:layout="@layout/details_fragment">
+        <action android:id="@+id/action_detailsFragment_to_tabFragment2" app:destination="@id/tabFragment2"/>
+    </fragment>
+    <fragment android:id="@+id/tabFragment2" android:name="com.pozdniakov.movieviewer.fragment.TabFragment"
+              android:label="tab_fragment" tools:layout="@layout/tab_fragment">
+        <action android:id="@+id/action_tabFragment2_to_detailsFragment" app:destination="@id/detailsFragment"/>
     </fragment>
 </navigation>

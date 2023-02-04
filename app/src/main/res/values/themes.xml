@@ -50,4 +50,14 @@
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
+    <style name="Theme.MovieViewer.Main.Details.Text" parent="Theme.MovieViewer.Main.Text">
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">10</item>
+    </style>
+    <style name="Theme.MovieViewer.Details.Text" parent="Theme.MovieViewer.Description.Text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">10</item>
+    </style>
 </resources>

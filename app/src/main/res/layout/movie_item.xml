@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="wrap_content"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="movie" type="com.pozdniakov.movieviewer.data.Movie" />
+        <variable name="toDetailsClickListener" type="android.view.View.OnClickListener" />
+        <variable name="favouriteLongClickListener" type="android.view.View.OnLongClickListener" />
+    </data>
+    <RelativeLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
     <androidx.cardview.widget.CardView
             android:layout_height="93dp"
             android:clickable="true"
@@ -12,6 +17,8 @@
             android:layout_marginBottom="4dp"
             app:cardCornerRadius="15dp"
             app:cardElevation="4dp"
+            android:onClick="@{(view) -> toDetailsClickListener.onClick(view)}"
+            android:onLongClick ="@{(view) -> favouriteLongClickListener.onLongClick(view)}"
             android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="match_parent">
         <ImageView
@@ -50,3 +57,4 @@
 
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
+</layout>

@@ -38,6 +38,7 @@ class PopularFragment : Fragment() {
         viewModel = ViewModelProvider(this, ViewModelFactory(mainRepository))[PopularViewModel::class.java]
         viewModel.popular.observe(this) {
             adapter.data = it.films
+            adapter.notifyDataSetChanged()
         }
 
         viewModel.errorMessage.observe(this) {

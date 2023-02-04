@@ -1,6 +1,7 @@
-package com.pozdniakov.movieviewer
+package com.pozdniakov.movieviewer.data
 
 import com.google.gson.annotations.SerializedName
+import com.pozdniakov.movieviewer.data.Movie
 
 
 data class Popular (
