@@ -1,4 +1,4 @@
-package com.pozdniakov.movieviewer.repository
+package com.pozdniakov.movieviewer.api
 
 import com.pozdniakov.movieviewer.api.MovieApi
 

@@ -6,11 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pozdniakov.movieviewer.api.MovieApi
 import com.pozdniakov.movieviewer.databinding.DetailsFragmentBinding
-import com.pozdniakov.movieviewer.repository.MainRepository
+import com.pozdniakov.movieviewer.api.MainRepository
 import com.pozdniakov.movieviewer.viewmodel.DetailsViewModel
 import com.pozdniakov.movieviewer.viewmodel.ViewModelFactory
 import com.squareup.picasso.Picasso
@@ -24,12 +23,12 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var filmId = arguments?.getInt("filmId")
+        val filmId = arguments?.getInt("filmId")
         binding = DetailsFragmentBinding.inflate(layoutInflater)
 
         val movieApi = MovieApi.getInstance()
         val mainRepository = MainRepository(movieApi)
-        viewModel = ViewModelProvider(this, ViewModelFactory(mainRepository))[DetailsViewModel::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory(mainRepository, activity!!.application))[DetailsViewModel::class.java]
 
         viewModel.description.observe(this) {
             Picasso.get()
@@ -52,7 +51,7 @@ class DetailsFragment : Fragment() {
             Toast.makeText(this.context, it, Toast.LENGTH_SHORT).show()
         }
 
-        viewModel.loading.observe(this, Observer {
+        viewModel.loading.observe(this, {
             if (it) {
                 binding.progressDialog.visibility = View.VISIBLE
             } else {

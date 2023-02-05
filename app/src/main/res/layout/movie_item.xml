@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="movie" type="com.pozdniakov.movieviewer.data.Movie"/>
+        <variable name="movie" type="com.pozdniakov.movieviewer.data.api.Movie"/>
         <variable name="toDetailsClickListener" type="android.view.View.OnClickListener"/>
         <variable name="favouriteLongClickListener" type="android.view.View.OnLongClickListener"/>
     </data>

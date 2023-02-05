@@ -1,4 +1,4 @@
-package com.pozdniakov.movieviewer.data
+package com.pozdniakov.movieviewer.data.api
 
 import com.google.gson.annotations.SerializedName
 

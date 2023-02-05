@@ -1,31 +1,31 @@
-package com.pozdniakov.movieviewer.data
+package com.pozdniakov.movieviewer.data.api
 
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 
-data class Countries(
+data class Genres(
 
-    @SerializedName("country") var country: String? = null
+    @SerializedName("genre") var genre: String? = null
 
 ) : Parcelable {
     constructor(parcel: Parcel) : this(parcel.readString())
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(country)
+        parcel.writeString(genre)
     }
 
     override fun describeContents(): Int {
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Countries> {
-        override fun createFromParcel(parcel: Parcel): Countries {
-            return Countries(parcel)
+    companion object CREATOR : Parcelable.Creator<Genres> {
+        override fun createFromParcel(parcel: Parcel): Genres {
+            return Genres(parcel)
         }
 
-        override fun newArray(size: Int): Array<Countries?> {
+        override fun newArray(size: Int): Array<Genres?> {
             return arrayOfNulls(size)
         }
     }

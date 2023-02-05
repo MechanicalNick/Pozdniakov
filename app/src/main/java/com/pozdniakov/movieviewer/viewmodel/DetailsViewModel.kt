@@ -1,20 +1,12 @@
 package com.pozdniakov.movieviewer.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.pozdniakov.movieviewer.data.MovieDescription
-import com.pozdniakov.movieviewer.repository.MainRepository
+import com.pozdniakov.movieviewer.data.api.MovieDescription
+import com.pozdniakov.movieviewer.api.MainRepository
 import kotlinx.coroutines.*
 
-class DetailsViewModel(private val repository: MainRepository) : ViewModel() {
-    val errorMessage = MutableLiveData<String>()
+class DetailsViewModel(private val repository: MainRepository) : BaseViewModel() {
     val description = MutableLiveData<MovieDescription>()
-    var job: Job? = null
-    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        onError("Exception handled: ${throwable.localizedMessage}")
-    }
-    val loading = MutableLiveData<Boolean>()
-
     fun getDescription(id: Int) {
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
             val response = repository.getDescription(id)
@@ -27,15 +19,5 @@ class DetailsViewModel(private val repository: MainRepository) : ViewModel() {
                 }
             }
         }
-    }
-
-    private fun onError(message: String) {
-        errorMessage.postValue(message)
-        loading.postValue(false)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        job?.cancel()
     }
 }

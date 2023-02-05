@@ -1,19 +1,30 @@
 package com.pozdniakov.movieviewer.viewmodel
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.pozdniakov.movieviewer.data.Popular
-import com.pozdniakov.movieviewer.repository.MainRepository
+import com.pozdniakov.movieviewer.data.api.Popular
+import com.pozdniakov.movieviewer.data.database.MovieDescriptionDatabase
+import com.pozdniakov.movieviewer.data.database.MovieDescriptionRepository
+import com.pozdniakov.movieviewer.data.database.entity.MovieDescriptionEntity
+import com.pozdniakov.movieviewer.api.MainRepository
 import kotlinx.coroutines.*
 
-class PopularViewModel(private val repository: MainRepository) : ViewModel() {
-    val errorMessage = MutableLiveData<String>()
+class PopularViewModel(private val repository: MainRepository, private val app: Application) :
+    BaseViewModel(), IInsertViewModel {
     val popular = MutableLiveData<Popular>()
-    var job: Job? = null
-    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        onError("Exception handled: ${throwable.localizedMessage}")
+
+    private val movieDescriptionRepository: MovieDescriptionRepository
+
+    init {
+        val db = MovieDescriptionDatabase.getDataBase(app)
+        movieDescriptionRepository = MovieDescriptionRepository(db.movieDescriptionDao())
     }
-    val loading = MutableLiveData<Boolean>()
+
+    override fun insert(description: MovieDescriptionEntity){
+        job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+            movieDescriptionRepository.insert(description)
+        }
+    }
 
     fun getPopular() {
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
@@ -27,15 +38,5 @@ class PopularViewModel(private val repository: MainRepository) : ViewModel() {
                 }
             }
         }
-    }
-
-    private fun onError(message: String) {
-        errorMessage.postValue(message)
-        loading.postValue(false)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        job?.cancel()
     }
 }

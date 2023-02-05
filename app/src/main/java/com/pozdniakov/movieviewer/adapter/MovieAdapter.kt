@@ -1,4 +1,3 @@
-package com.pozdniakov.movieviewer.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,15 +6,17 @@ import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.pozdniakov.movieviewer.R
-import com.pozdniakov.movieviewer.data.Movie
+import com.pozdniakov.movieviewer.data.api.Movie
+import com.pozdniakov.movieviewer.data.database.entity.MovieDescriptionEntity
 import com.pozdniakov.movieviewer.databinding.MovieItemBinding
+import com.pozdniakov.movieviewer.viewmodel.IInsertViewModel
+import com.pozdniakov.movieviewer.viewmodel.PopularViewModel
 import com.squareup.picasso.Picasso
 
 private const val maxCharInString = 31
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private val viewModel: IInsertViewModel) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     var data: MutableList<Movie> = mutableListOf()
-
     class MovieViewHolder(val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
@@ -39,11 +40,24 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
             val bundle = bundleOf("filmId" to movie.filmId)
             holder.binding.toDetailsClickListener = Navigation
                 .createNavigateOnClickListener(R.id.detailsFragment, bundle)
-            holder.binding.favouriteLongClickListener = View.OnLongClickListener { true }
+            holder.binding.favouriteLongClickListener = View.OnLongClickListener {
+                viewModel.insert(toEntity(movie))
+                true
+            }
             Picasso.get()
                 .load(movie.posterUrlPreview)
                 .into(imageView)
         }
+    }
+
+    private fun toEntity(movie: Movie): MovieDescriptionEntity {
+        var entry = MovieDescriptionEntity()
+        entry.name = movie.nameRu
+        entry.isFavourite = true
+        entry.filmId = movie.filmId
+        entry.posterUrl = movie.posterUrl
+        entry.posterUrlPreview = movie.posterUrlPreview
+        return entry
     }
 
     private fun getName(movie: Movie): String {
@@ -61,3 +75,4 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         return descriptionBuilder.toString()
     }
 }
+

@@ -1,8 +1,9 @@
-package com.pozdniakov.movieviewer.data
+package com.pozdniakov.movieviewer.data.api
 
 import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.pozdniakov.movieviewer.data.database.entity.MovieDescriptionEntity
 
 
 data class Movie(
