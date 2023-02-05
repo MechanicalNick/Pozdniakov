@@ -40,7 +40,7 @@ data class Movie(
         parcel.readString()
     )
 
-  override fun writeToParcel(parcel: Parcel, flags: Int) {
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(filmId)
         parcel.writeString(nameRu)
         parcel.writeString(nameEn)

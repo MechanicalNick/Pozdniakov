@@ -2,59 +2,59 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <variable name="movie" type="com.pozdniakov.movieviewer.data.Movie" />
-        <variable name="toDetailsClickListener" type="android.view.View.OnClickListener" />
-        <variable name="favouriteLongClickListener" type="android.view.View.OnLongClickListener" />
+        <variable name="movie" type="com.pozdniakov.movieviewer.data.Movie"/>
+        <variable name="toDetailsClickListener" type="android.view.View.OnClickListener"/>
+        <variable name="favouriteLongClickListener" type="android.view.View.OnLongClickListener"/>
     </data>
     <RelativeLayout android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-    <androidx.cardview.widget.CardView
-            android:layout_height="93dp"
-            android:clickable="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="4dp"
-            android:onClick="@{(view) -> toDetailsClickListener.onClick(view)}"
-            android:onLongClick ="@{(view) -> favouriteLongClickListener.onLongClick(view)}"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:layout_width="match_parent">
-        <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="40dp"
-                android:layout_height="63dp"
-                android:src="@drawable/ic_launcher_foreground"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"/>
+        <androidx.cardview.widget.CardView
+                android:layout_height="93dp"
+                android:clickable="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="4dp"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="4dp"
+                android:onClick="@{(view) -> toDetailsClickListener.onClick(view)}"
+                android:onLongClick="@{(view) -> favouriteLongClickListener.onLongClick(view)}"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:layout_width="match_parent">
+            <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="40dp"
+                    android:layout_height="63dp"
+                    android:src="@drawable/ic_launcher_foreground"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="15dp"/>
 
-        <TextView
-                android:id="@+id/nameTextView"
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                style="@style/Theme.MovieViewer.Main.Text"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="26dp"/>
+            <TextView
+                    android:id="@+id/nameTextView"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    style="@style/Theme.MovieViewer.Main.Text"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginTop="26dp"/>
 
-        <TextView
-                android:id="@+id/genreTextView"
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                style="@style/Theme.MovieViewer.Description.Text"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="50dp"/>
+            <TextView
+                    android:id="@+id/genreTextView"
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    style="@style/Theme.MovieViewer.Description.Text"
+                    android:layout_marginStart="70dp"
+                    android:layout_marginTop="50dp"/>
 
-        <ImageView
-                android:id="@+id/starImageView"
-                android:src="@drawable/star"
-                android:layout_gravity="end"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="28dp"/>
+            <ImageView
+                    android:id="@+id/starImageView"
+                    android:src="@drawable/star"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="28dp"/>
 
-    </androidx.cardview.widget.CardView>
-</RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 </layout>
