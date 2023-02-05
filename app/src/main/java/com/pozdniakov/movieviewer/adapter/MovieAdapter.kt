@@ -36,7 +36,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
             nameTextView.text = getName(movie)
             genreTextView.text = getDescription(movie)
 
-            val bundle = bundleOf("movie" to movie)
+            val bundle = bundleOf("filmId" to movie.filmId)
             holder.binding.toDetailsClickListener = Navigation
                 .createNavigateOnClickListener(R.id.detailsFragment, bundle)
             holder.binding.favouriteLongClickListener = View.OnLongClickListener { true }

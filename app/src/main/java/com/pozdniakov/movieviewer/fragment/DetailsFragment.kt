@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.pozdniakov.movieviewer.api.MovieApi
-import com.pozdniakov.movieviewer.data.Movie
 import com.pozdniakov.movieviewer.databinding.DetailsFragmentBinding
 import com.pozdniakov.movieviewer.repository.MainRepository
 import com.pozdniakov.movieviewer.viewmodel.DetailsViewModel
@@ -25,7 +24,7 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var movie = arguments?.getParcelable("movie") as Movie?
+        var filmId = arguments?.getInt("filmId")
         binding = DetailsFragmentBinding.inflate(layoutInflater)
 
         val movieApi = MovieApi.getInstance()
@@ -54,7 +53,7 @@ class DetailsFragment : Fragment() {
             }
         })
 
-        movie?.filmId.let { viewModel.getDescription(it!!) }
+        filmId?.let { viewModel.getDescription(it) }
 
         return binding.root
     }
