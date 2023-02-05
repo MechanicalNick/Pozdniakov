@@ -39,6 +39,9 @@ class DetailsFragment : Fragment() {
             binding.detailsCountryTextView.text = it.countries.firstOrNull()?.country
             binding.detailsGenreTextView.text = it.genres.firstOrNull()?.genre
             binding.detailsDescriptionTextView.text = it.description
+            binding.backClickListener = View.OnClickListener {
+                parentFragmentManager.popBackStack()
+            }
         }
 
         viewModel.errorMessage.observe(this) {
