@@ -18,6 +18,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:indeterminate="true"
+            android:layout_gravity="center"
             android:indeterminateTintMode="src_atop"
             android:indeterminateTint="@color/seed"
             app:layout_constraintTop_toTopOf="parent"
