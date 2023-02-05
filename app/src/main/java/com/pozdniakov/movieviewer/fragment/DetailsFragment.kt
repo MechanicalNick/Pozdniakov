@@ -35,10 +35,14 @@ class DetailsFragment : Fragment() {
             Picasso.get()
                 .load(it.posterUrl)
                 .into(binding.detailsImageView)
+
             binding.detailsNameTextView.text = it.nameRu
-            binding.detailsCountryTextView.text = it.countries.firstOrNull()?.country
-            binding.detailsGenreTextView.text = it.genres.firstOrNull()?.genre
+            binding.detailsCountryTextView.text = it.countries
+                .mapNotNull { x -> x.country }.joinToString(" ,")
+            binding.detailsGenreTextView.text = it.genres
+                .mapNotNull { x -> x.genre }.joinToString(" ,")
             binding.detailsDescriptionTextView.text = it.description
+
             binding.backClickListener = View.OnClickListener {
                 parentFragmentManager.popBackStack()
             }

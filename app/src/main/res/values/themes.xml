@@ -54,7 +54,6 @@
     </style>
     <style name="Theme.MovieViewer.Details.Text" parent="Theme.MovieViewer.Description.Text">
         <item name="android:textSize">14sp</item>
-        <item name="android:gravity">center</item>
         <item name="android:maxLines">10</item>
     </style>
 </resources>
