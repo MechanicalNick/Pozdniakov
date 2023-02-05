@@ -1,9 +1,12 @@
 package com.pozdniakov.movieviewer.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.pozdniakov.movieviewer.data.api.MovieDescription
 import com.pozdniakov.movieviewer.api.MainRepository
-import kotlinx.coroutines.*
+import com.pozdniakov.movieviewer.data.api.MovieDescription
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DetailsViewModel(private val repository: MainRepository) : BaseViewModel() {
     val description = MutableLiveData<MovieDescription>()

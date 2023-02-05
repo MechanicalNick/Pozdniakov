@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.pozdniakov.movieviewer.api.MainRepository
 import com.pozdniakov.movieviewer.api.MovieApi
 import com.pozdniakov.movieviewer.databinding.DetailsFragmentBinding
-import com.pozdniakov.movieviewer.api.MainRepository
 import com.pozdniakov.movieviewer.viewmodel.DetailsViewModel
 import com.pozdniakov.movieviewer.viewmodel.ViewModelFactory
 import com.squareup.picasso.Picasso
@@ -28,7 +28,10 @@ class DetailsFragment : Fragment() {
 
         val movieApi = MovieApi.getInstance()
         val mainRepository = MainRepository(movieApi)
-        viewModel = ViewModelProvider(this, ViewModelFactory(mainRepository, activity!!.application))[DetailsViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(mainRepository, activity!!.application)
+        )[DetailsViewModel::class.java]
 
         viewModel.description.observe(this) {
             Picasso.get()

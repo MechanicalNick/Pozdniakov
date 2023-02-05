@@ -12,16 +12,16 @@ import com.pozdniakov.movieviewer.data.database.entity.MovieDescriptionEntity
     version = 1,
     exportSchema = false
 )
-abstract class MovieDescriptionDatabase : RoomDatabase(){
+abstract class MovieDescriptionDatabase : RoomDatabase() {
     abstract fun movieDescriptionDao(): MovieDescriptionDao
 
     companion object {
         @Volatile
-        private var INSTANCE: MovieDescriptionDatabase ?= null
-        fun getDataBase(context: Context) : MovieDescriptionDatabase{
+        private var INSTANCE: MovieDescriptionDatabase? = null
+        fun getDataBase(context: Context): MovieDescriptionDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) return tempInstance
-            synchronized(this){
+            synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     MovieDescriptionDatabase::class.java,

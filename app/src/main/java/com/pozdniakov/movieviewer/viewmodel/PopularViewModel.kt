@@ -2,12 +2,15 @@ package com.pozdniakov.movieviewer.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import com.pozdniakov.movieviewer.api.MainRepository
 import com.pozdniakov.movieviewer.data.api.Popular
 import com.pozdniakov.movieviewer.data.database.MovieDescriptionDatabase
 import com.pozdniakov.movieviewer.data.database.MovieDescriptionRepository
 import com.pozdniakov.movieviewer.data.database.entity.MovieDescriptionEntity
-import com.pozdniakov.movieviewer.api.MainRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PopularViewModel(private val repository: MainRepository, private val app: Application) :
     BaseViewModel(), IInsertViewModel {
@@ -20,7 +23,7 @@ class PopularViewModel(private val repository: MainRepository, private val app: 
         movieDescriptionRepository = MovieDescriptionRepository(db.movieDescriptionDao())
     }
 
-    override fun insert(description: MovieDescriptionEntity){
+    override fun insert(description: MovieDescriptionEntity) {
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
             movieDescriptionRepository.insert(description)
         }

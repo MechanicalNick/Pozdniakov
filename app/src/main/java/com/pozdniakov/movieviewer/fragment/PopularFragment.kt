@@ -9,10 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.pozdniakov.movieviewer.R
+import com.pozdniakov.movieviewer.api.MainRepository
 import com.pozdniakov.movieviewer.api.MovieApi
 import com.pozdniakov.movieviewer.databinding.PopularFragmentBinding
 import com.pozdniakov.movieviewer.decorator.MarginItemDecoration
-import com.pozdniakov.movieviewer.api.MainRepository
 import com.pozdniakov.movieviewer.viewmodel.PopularViewModel
 import com.pozdniakov.movieviewer.viewmodel.ViewModelFactory
 
@@ -30,7 +30,10 @@ class PopularFragment : Fragment() {
         val movieApi = MovieApi.getInstance()
         val mainRepository = MainRepository(movieApi)
 
-        viewModel = ViewModelProvider(this, ViewModelFactory(mainRepository, activity!!.application))[PopularViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(mainRepository, activity!!.application)
+        )[PopularViewModel::class.java]
         adapter = MovieAdapter(viewModel)
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addItemDecoration(

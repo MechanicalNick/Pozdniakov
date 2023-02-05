@@ -1,4 +1,3 @@
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +9,13 @@ import com.pozdniakov.movieviewer.data.api.Movie
 import com.pozdniakov.movieviewer.data.database.entity.MovieDescriptionEntity
 import com.pozdniakov.movieviewer.databinding.MovieItemBinding
 import com.pozdniakov.movieviewer.viewmodel.IInsertViewModel
-import com.pozdniakov.movieviewer.viewmodel.PopularViewModel
 import com.squareup.picasso.Picasso
 
 private const val maxCharInString = 31
 
 class MovieAdapter(private val viewModel: IInsertViewModel) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     var data: MutableList<Movie> = mutableListOf()
+
     class MovieViewHolder(val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
