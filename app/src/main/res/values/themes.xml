@@ -56,4 +56,8 @@
         <item name="android:textSize">14sp</item>
         <item name="android:maxLines">10</item>
     </style>
+    <style name="Button.Blue" parent="TextAppearance.AppCompat.Button">
+        <item name="colorAccent">@color/seed</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
 </resources>

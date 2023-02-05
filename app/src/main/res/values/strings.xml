@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">movie viewer</string>
-    <!-- Strings used for fragments for navigation -->
+    <string name="internet_connection_error">Произошла ошибка при загрузке данных, проверьте подключение к сети</string>
+    <string name="try_again">Повторить</string>
+    <string name="loading">Загрузка</string>
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-
 </resources>
